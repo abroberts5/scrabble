@@ -13,15 +13,12 @@ class Scrabble
   end
 
   def score(word)
-    if word.nil?
-      return 0
-    else
-      sep_word = word.upcase.chars
-      new_word = sep_word.map do |letter|
-        point_values[letter]
-      end
-      new_word.sum
+    return 0 if word.nil?
+    sep_word = word.upcase.chars
+    new_word = sep_word.map do |letter|
+      point_values[letter]
     end
+    new_word.sum
   end
 
   def score_with_multipliers(word, multipliers, double = 1)
@@ -29,6 +26,10 @@ class Scrabble
     new_word = sep_word.map.with_index do |letter, index|
       point_values[letter] * multipliers[index]
     end
+    bonus(word, new_word, double)
+  end
+
+  def bonus(word, new_word, double)
     if word.length > 6
       (new_word.sum + 10) * double
     else
