@@ -12,6 +12,7 @@ class ScrabbleTest < Minitest::Test
   def test_it_can_score_a_single_letter
     game = Scrabble.new
     assert_equal 1, game.score("a")
+    assert_equal 4, game.score("f")
   end
 
   def test_it_can_score_a_word
@@ -19,7 +20,7 @@ class ScrabbleTest < Minitest::Test
     assert_equal 8, game.score("hello")
   end
 
-  def test_case_name
+  def test_it_returns_zero_for_empty_string_or_nil
     game = Scrabble.new
     assert_equal 0, game.score("")
     assert_equal 0, game.score(nil)
@@ -44,6 +45,7 @@ class ScrabbleTest < Minitest::Test
   end
 
   def test_highest_scoring_word
+    skip
     game = Scrabble.new
     actual = game.highest_scoring_word(['home', 'word', 'hello', 'sound'])
     assert_equal "home", actual
